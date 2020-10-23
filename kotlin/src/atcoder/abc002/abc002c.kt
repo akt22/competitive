@@ -17,23 +17,23 @@ fun main(args: Array<String>) {
 private fun solve(n: Int, relation: Map<Int, List<Int>>) {
     var ans = 0
     for (bit in 0 until 1.shl(n)) {
-        val tmpr = mutableListOf<Int>()
+        val tmp = mutableListOf<Int>()
         var flg = true
         for (i in 0 until n) {
             if (1.shl(i) and bit == 0) {
                 continue
             }
-            for (c in tmpr) {
-                val cs = relation[c] ?: continue
-                if (!cs.contains(i + 1)) {
+            for (c in tmp) {
+                val cs = relation[c]
+                if (cs == null || !cs.contains(i + 1)) {
                     flg = false
                     break
                 }
             }
-            tmpr.add(i + 1)
+            tmp.add(i + 1)
         }
         if (flg) {
-            ans = max(ans, tmpr.size)
+            ans = max(ans, tmp.size)
         }
     }
     println(ans)
