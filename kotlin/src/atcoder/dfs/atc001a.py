@@ -16,7 +16,7 @@ def dfs(y, x):
         print('Yes')
         exit()
 
-    c[y][x] = '#' 
+    c[y][x] = '#'
     dfs(y-1, x)
     dfs(y+1, x)
     dfs(y, x-1)
