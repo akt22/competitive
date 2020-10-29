@@ -11,9 +11,7 @@ def main():
             if (0 <= nx < C) and (0 <= ny < R) and maze[ny][nx] != "#" and d[ny][nx] == INF:
                 q.append([nx, ny])
                 d[ny][nx] = d[y][x] + 1
-
     print(d[gy][gx])
-
 
 if __name__ == "__main__":
     INF = 10000000
