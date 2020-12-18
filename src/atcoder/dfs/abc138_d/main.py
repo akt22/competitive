@@ -1,32 +1,29 @@
 from collections import defaultdict
 import sys
-sys.setrecursionlimit(10**7)
+sys.setrecursionlimit(10**9)
 
 
 N, Q = map(int, input().split())
 tree = defaultdict(list)
 for _ in range(N - 1):
-    a, b = map(lambda x: int(x) - 1, input().split())
+    a, b = map(int, input().split())
+    a, b = a - 1, b - 1
     tree[a].append(b)
+    tree[b].append(a)
 
-opes = []
+ans = [0] * N
 for _ in range(Q):
     p, x = map(int, input().split())
-    opes.append([p - 1, x])
+    ans[p - 1] += x
 
 
-def dfs(cost, ope):
-    p, x = ope
-    if p not in tree:
-        cost[p] += x
-        return cost
-    for child in tree[p]:
-        dfs(cost, [child, x])
-    cost[p] += x
+def dfs(c, p):
+    for n in tree[c]:
+        if n == p:
+            continue
+        ans[n] += ans[c]
+        dfs(n, c)
 
 
-cost = defaultdict(int)
-for ope in opes:
-    dfs(cost, ope)
-
-print(" ".join([str(cost[i]) for i in range(N)]))
+dfs(0, -1)
+print(*ans)
