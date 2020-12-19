@@ -21,14 +21,6 @@ def pp(x, y):
     print("===================")
 
 
-def is_finished():
-    for y in range(h):
-        for x in range(w):
-            if maze[y][x].isnumeric():
-                return False
-    return True
-
-
 visited = [[False for _ in range(w)] for _ in range(h)]
 
 for y in range(h):
@@ -49,7 +41,7 @@ while q:
         maze[y][x] = "."
         visited = [[False for _ in range(w)] for _ in range(h)]
         q = deque()
-        if is_finished():
+        if hp > n:
             print(cnt)
             exit()
 
