@@ -2,8 +2,6 @@ from operator import mul
 from functools import reduce
 
 N, M = map(int, input().split())
-
-
 MOD = 10**9 + 7
 
 
@@ -23,7 +21,10 @@ def prime_factorize(n):
     return d
 
 
-def comb(n, r, mod=None):
+def comb(n, r, mod=None, repetition=False):
+    if repetition:
+        n = n + r - 1
+        r = r - 1
     r = min(n - r, r)
     if r == 0:
         return 1
@@ -41,9 +42,7 @@ def comb(n, r, mod=None):
 
 d = prime_factorize(M)
 
-
 ans = 1
 for p, k in d.items():
-    each = comb(k + N - 1, N - 1)
-    ans = (ans * each) % MOD
-print(ans)
+    ans *= comb(k, N, mod=MOD, repetition=True)
+print(ans % MOD)
