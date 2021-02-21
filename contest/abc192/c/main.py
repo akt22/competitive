@@ -1,15 +1,13 @@
 N, K = list(map(int, input().split()))
-str_N = str(N)
+raw = str(N)
 
 
 def f(s):
     return str(int(s[::-1]) - int(s))
 
 
-raw = str_N
-s = "".join(sorted(list(str_N)))
-for k in range(K):
+s = "".join(sorted(list(raw)))
+for _ in range(K):
     raw = f(s)
-    new = "".join(sorted(list(raw)))
-    s = new
+    s = "".join(sorted(list(raw)))
 print(raw)
