@@ -7,5 +7,7 @@ def sn(n, a, d):
 
 ans = 0
 for i in range(1, N + 1):
-    ans += sn(N // i, i, i)
+    for j in range(i, N + 1, i):
+        ans += j
+    # ans += sn(N // i, i, i)
 print(ans)
