@@ -5,19 +5,26 @@ queries = [list(map(int, input().split())) for _ in range(Q)]
 
 bagages.sort(key=lambda x: x[1], reverse=True)
 
+# どの箱にどの荷物を入れることができるかを保存するリスト（価値の降順に保存される）
 a = [[] for _ in range(M)]
-for i, (w, v) in enumerate(bagages):
-    for idx, cap in enumerate(caps):
+
+for idx, cap in enumerate(caps):
+    for i, (w, v) in enumerate(bagages):
         if cap >= w:
             a[idx].append((i, v))
-print(a)
+
+# 容量が小さい順番に見ていきたいので順番を保存
+c = sorted(list(zip(range(0, M), caps)), key=lambda x: x[1])
 
 for l, r in queries:
     choice = set()
     ans = 0
-    for i, box in enumerate(a):
+    # 容量が小さい順に見ていく
+    for i, _ in c:
         if l - 1 <= i <= r - 1:
             continue
+        box = a[i]
+        # 箱には価値の降順で保存されているので、1つずつ見ていく
         for idx, v in box:
             if idx in choice:
                 continue

@@ -1,9 +1,8 @@
-from math import ceil
+from math import ceil, floor
 A, B, W = list(map(int, input().split()))
 W = W * 1000
 
-for i in range(A, B + 1):
-    if W % i == 0:
-        print(ceil(W / B), W // A)
-        exit()
-print("UNSATISFIABLE")
+if ceil(W / B) > floor(W / A):
+    print("UNSATISFIABLE")
+else:
+    print(ceil(W / B), floor(W / A))
