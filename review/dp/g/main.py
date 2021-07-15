@@ -1,25 +1,31 @@
-from collections import defaultdict, deque
+from collections import defaultdict
+
+import sys
+sys.setrecursionlimit(500000)
 
 N, M = list(map(int, input().split()))
 g = defaultdict(list)
-deg = defaultdict(int)
 for _ in range(M):
     x, y = list(map(int, input().split()))
     x, y = x - 1, y - 1
     g[x].append(y)
-    deg[y] += 1
 
-costs = [0] * N
+dp = [-1] * (N + 1)
 
-q = deque()
+
+def rec(v):
+    if dp[v] != -1:
+        return dp[v]
+
+    res = 0
+    for dest in g[v]:
+        res = max(res, rec(dest) + 1)
+
+    dp[v] = res
+    return dp[v]
+
+
+ans = 0
 for i in range(N):
-    if i not in deg:
-        q.append(i)
-while q:
-    dep = q.popleft()
-    for dest in g[dep]:
-        deg[dest] -= 1
-        if deg[dest] == 0:
-            q.append(dest)
-            costs[dest] = max(costs[dest], costs[dep] + 1)
-print(max(costs))
+    ans = max(ans, rec(i))
+print(ans)
