@@ -5,7 +5,7 @@ for i, x in zip(range(1, N + 1), map(int, input().split())):
 B = []
 for i, x in zip(range(1, N + 1), map(int, input().split())):
     B.append([i, x])
-S = [[i + 1, a[1] + b[1]] for i, (a, b) in enumerate(zip(A, B))]
+S = [[a[0], a[1] + b[1]] for a, b in zip(A, B)]
 
 ans = set()
 
