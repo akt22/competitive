@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -44,24 +43,13 @@ func main() {
 
 	A := strings.Split(readline(), " ")
 
-	m := make(map[string]bool)
-	var AA []int
-
+	m := make(map[int]bool)
 	for _, a := range A {
-		if !m[a] {
-			m[a] = true
-			AA = append(AA, atoi(a))
-		}
+		m[atoi(a)] = true
 	}
-	sort.Ints(AA)
-
-	l := len(AA)
 
 	for i := 0; i < K; i++ {
-		if l <= i {
-			fmt.Println(AA[l-1] + 1)
-			os.Exit(0)
-		} else if AA[i] != i {
+		if !m[i] {
 			fmt.Println(i)
 			os.Exit(0)
 		}
