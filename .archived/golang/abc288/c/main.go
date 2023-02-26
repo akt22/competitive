@@ -40,7 +40,7 @@ func mapAtoi(s string) []int {
 		return ret
 	}
 
-	l := strings.Split(s, " ")
+	l := strings.Fields(s)
 	for _, elem := range l {
 		ret = append(ret, atoi(elem))
 	}
