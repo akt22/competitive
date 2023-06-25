@@ -4,3 +4,4 @@ out
 *.in
 *.out
 contest.acc.json
+go.mod
