@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -44,4 +45,19 @@ func mapAtoi(s string) []int {
 		ret = append(ret, atoi(elem))
 	}
 	return ret
+}
+
+// ===========================================================================================
+// main
+// -------------------------------------------------------------------------------------------
+func main() {
+	v := []string{"a", "b", "c", "d", "e", "f", "g", "h"}
+	for i := 0; i < 8; i++ {
+		s := readline()
+		for j := 0; j < 8; j++ {
+			if s[j] == '*' {
+				fmt.Printf("%s%d\n", v[j], 8-i)
+			}
+		}
+	}
 }
