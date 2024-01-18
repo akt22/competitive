@@ -9,12 +9,13 @@ for i in range(3, N + 1):
     dp[i] = min(dp[i - 1] + A[i], dp[i - 2] + B[i])
 
 ans = [N]
-idx = N
-
-while idx > 1:
-    idx = idx - 1 if dp[idx - 1] == dp[idx] - A[idx] else idx - 2
-    ans.append(idx)
-
+i = N
+while i > 1:
+    if dp[i] - A[i] == dp[i - 1]:
+        ans.append(i - 1)
+        i = i - 1
+    else:
+        ans.append(i - 2)
+        i = i - 2
 print(len(ans))
-ans.reverse()
-print(*ans, sep=" ")
+print(*ans[::-1], sep=" ")
