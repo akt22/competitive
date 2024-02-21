@@ -9,6 +9,8 @@ dp[2] = abs(h[2] - h[1])
 
 for i in range(3, N + 1):
     for k in range(1, K + 1):
-        if i - k > 0:
-            dp[i] = min(dp[i], dp[i - k] + abs(h[i] - h[i - k]))
+        if i - k <= 0:
+            continue
+        dp[i] = min(dp[i], abs(h[i] - h[i - k]) + dp[i - k])
+
 print(dp[N])
