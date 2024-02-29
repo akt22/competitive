@@ -1,6 +1,6 @@
-from collections import defaultdict
-
 import sys
+
+from collections import defaultdict
 
 sys.setrecursionlimit(500000)
 
@@ -14,16 +14,16 @@ for _ in range(M):
 dp = [-1] * (N + 1)
 
 
-def rec(dep):
-    if dp[dep] != -1:
-        return dp[dep]
-    ret = 0
-    for dest in g[dep]:
-        ret = max(ret, rec(dest) + 1)
-    dp[dep] = ret
-    return ret
+def rec(i):
+    if dp[i] != -1:
+        return dp[i]
+    dp[i] = 0
+    for dest in g[i]:
+        dp[i] = max(dp[i], rec(dest) + 1)
+    return dp[i]
 
 
 for i in range(1, N + 1):
     rec(i)
+
 print(max(dp))
